@@ -1,0 +1,34 @@
+{
+  "AlphaCutoff": 0.5,
+  "AlphaMode": 0,
+  "BaseColor": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "DoubleSided": false,
+  "Emissive": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "EmissiveIntensity": 1.0,
+  "Metallic": 0.0,
+  "NormalScale": 1.0,
+  "OcclusionStrength": 1.0,
+  "Roughness": 0.6000000238418579,
+  "Textures": {
+    "BaseColor": "Textures/checker.png"
+  },
+  "Type": "Material",
+  "UVOffset": [
+    0.0,
+    0.0
+  ],
+  "UVScale": [
+    6.0,
+    6.0
+  ],
+  "Version": 1
+}

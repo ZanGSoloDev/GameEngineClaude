@@ -1,0 +1,34 @@
+{
+  "AlphaCutoff": 0.5,
+  "AlphaMode": 0,
+  "BaseColor": [
+    0.699999988079071,
+    0.5,
+    0.3499999940395355,
+    1.0
+  ],
+  "DoubleSided": false,
+  "Emissive": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "EmissiveIntensity": 1.0,
+  "Metallic": 0.0,
+  "NormalScale": 1.0,
+  "OcclusionStrength": 1.0,
+  "Roughness": 0.5,
+  "Textures": {
+    "Normal": "Textures/bumps_normal.png"
+  },
+  "Type": "Material",
+  "UVOffset": [
+    0.0,
+    0.0
+  ],
+  "UVScale": [
+    2.0,
+    2.0
+  ],
+  "Version": 1
+}

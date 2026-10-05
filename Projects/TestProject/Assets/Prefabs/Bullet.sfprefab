@@ -1,0 +1,108 @@
+{
+  "Entities": [
+    {
+      "Components": {
+        "ColliderComponent": {
+          "Friction": 0.5,
+          "IsTrigger": false,
+          "Offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Restitution": 0.0,
+          "Shape": 1,
+          "Size": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/Emissive.sfmat",
+          "Mesh": "builtin://Sphere",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "RigidBodyComponent": {
+          "AngularDamping": 0.05000000074505806,
+          "Continuous": false,
+          "GravityFactor": 1.0,
+          "LinearDamping": 0.05000000074505806,
+          "LockRotationX": false,
+          "LockRotationY": false,
+          "LockRotationZ": false,
+          "Mass": 0.30000001192092896,
+          "Type": 2
+        },
+        "ScriptComponent": {
+          "Properties": {},
+          "Script": "Scripts/Bullet.lua"
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            0.3499999940395355,
+            0.3499999940395355,
+            0.3499999940395355
+          ],
+          "Translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "Name": "Bullet",
+      "Parent": 0,
+      "UUID": 3420869005200948874
+    },
+    {
+      "Components": {
+        "LightComponent": {
+          "CastShadows": false,
+          "Color": [
+            0.20000000298023224,
+            0.8999999761581421,
+            1.0
+          ],
+          "InnerConeAngle": 0.3490658402442932,
+          "Intensity": 6.0,
+          "OuterConeAngle": 0.5235987901687622,
+          "Range": 4.0,
+          "ShadowBias": 0.0020000000949949026,
+          "ShadowSoftness": 1.0,
+          "Type": 1
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "Name": "Glow",
+      "Parent": 3420869005200948874,
+      "UUID": 6206127348528777949
+    }
+  ],
+  "Root": 3420869005200948874,
+  "Type": "Prefab",
+  "Version": 1
+}

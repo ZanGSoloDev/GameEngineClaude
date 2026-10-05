@@ -50,6 +50,9 @@ namespace Starfall {
 		// Computes the BRDF LUT on first call.
 		void EnsureBrdfLut(nvrhi::ICommandList* commandList);
 
+		// Draws `source` over the whole destination framebuffer (scaled, linear filtered). Needs an open command list.
+		void Blit(nvrhi::ICommandList* commandList, nvrhi::ITexture* source, nvrhi::IFramebuffer* destination);
+
 		nvrhi::BufferHandle CreateVolatileConstantBuffer(size_t byteSize, const char* name) const;
 
 		// Compute helper: records a dispatch with the given pipeline/set/push constants.
@@ -67,6 +70,8 @@ namespace Starfall {
 		nvrhi::BindingLayoutHandle m_GlobalLayout, m_MaterialLayout, m_ImGuiLayout;
 		nvrhi::TextureHandle m_BrdfLut;
 		bool m_BrdfLutBuilt = false;
+		nvrhi::GraphicsPipelineHandle m_BlitPipeline;
+		nvrhi::FramebufferInfo m_BlitFramebufferInfo;
 	};
 
 	nvrhi::VulkanBindingOffsets ZeroBindingOffsets();

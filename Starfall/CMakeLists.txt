@@ -2,7 +2,7 @@ file(GLOB_RECURSE STARFALL_SOURCES CONFIGURE_DEPENDS Source/*.cpp Source/*.h)
 
 add_library(Starfall STATIC ${STARFALL_SOURCES})
 target_include_directories(Starfall PUBLIC Source)
-target_link_libraries(Starfall PUBLIC glm::glm nlohmann_json::nlohmann_json nvrhi nvrhi_vk Vulkan::Headers glfw)
+target_link_libraries(Starfall PUBLIC glm::glm nlohmann_json::nlohmann_json nvrhi nvrhi_vk Vulkan::Headers glfw imgui_lib)
 target_link_libraries(Starfall PRIVATE Jolt sol2 lua_lib miniaudio_lib stb_lib cgltf_lib)
 target_compile_definitions(Starfall PUBLIC NOMINMAX WIN32_LEAN_AND_MEAN VK_NO_PROTOTYPES $<$<CONFIG:Debug>:SF_DEBUG> GLM_ENABLE_EXPERIMENTAL GLM_FORCE_DEPTH_ZERO_TO_ONE GLM_FORCE_RADIANS)
 if(MSVC)

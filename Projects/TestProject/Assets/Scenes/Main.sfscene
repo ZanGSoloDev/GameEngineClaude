@@ -1,0 +1,1484 @@
+{
+  "Entities": [
+    {
+      "Components": {
+        "ColliderComponent": {
+          "Friction": 0.5,
+          "IsTrigger": false,
+          "Offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Restitution": 0.0,
+          "Shape": 0,
+          "Size": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/Checker.sfmat",
+          "Mesh": "builtin://Cube",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "RigidBodyComponent": {
+          "AngularDamping": 0.05000000074505806,
+          "Continuous": false,
+          "GravityFactor": 1.0,
+          "LinearDamping": 0.05000000074505806,
+          "LockRotationX": false,
+          "LockRotationY": false,
+          "LockRotationZ": false,
+          "Mass": 1.0,
+          "Type": 0
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            40.0,
+            1.0,
+            40.0
+          ],
+          "Translation": [
+            0.0,
+            -0.5,
+            0.0
+          ]
+        }
+      },
+      "Name": "Floor",
+      "Parent": 0,
+      "UUID": 15158244601242989994
+    },
+    {
+      "Components": {
+        "ColliderComponent": {
+          "Friction": 0.5,
+          "IsTrigger": false,
+          "Offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Restitution": 0.0,
+          "Shape": 0,
+          "Size": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/RoughStone.sfmat",
+          "Mesh": "builtin://Cube",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "RigidBodyComponent": {
+          "AngularDamping": 0.05000000074505806,
+          "Continuous": false,
+          "GravityFactor": 1.0,
+          "LinearDamping": 0.05000000074505806,
+          "LockRotationX": false,
+          "LockRotationY": false,
+          "LockRotationZ": false,
+          "Mass": 1.0,
+          "Type": 0
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            14.0,
+            4.0,
+            0.5
+          ],
+          "Translation": [
+            0.0,
+            2.0,
+            -9.0
+          ]
+        }
+      },
+      "Name": "Wall",
+      "Parent": 0,
+      "UUID": 13897649107936360820
+    },
+    {
+      "Components": {
+        "LightComponent": {
+          "CastShadows": true,
+          "Color": [
+            1.0,
+            0.949999988079071,
+            0.8500000238418579
+          ],
+          "InnerConeAngle": 0.3490658402442932,
+          "Intensity": 3.0,
+          "OuterConeAngle": 0.5235987901687622,
+          "Range": 15.0,
+          "ShadowBias": 0.0020000000949949026,
+          "ShadowSoftness": 1.0,
+          "Type": 0
+        },
+        "TransformComponent": {
+          "Rotation": [
+            -0.8377580642700195,
+            0.6108652353286743,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "Name": "Sun",
+      "Parent": 0,
+      "UUID": 1806173152763341311
+    },
+    {
+      "Components": {
+        "LightComponent": {
+          "CastShadows": true,
+          "Color": [
+            1.0,
+            0.5,
+            0.30000001192092896
+          ],
+          "InnerConeAngle": 0.3490658402442932,
+          "Intensity": 40.0,
+          "OuterConeAngle": 0.5235987901687622,
+          "Range": 10.0,
+          "ShadowBias": 0.0020000000949949026,
+          "ShadowSoftness": 1.0,
+          "Type": 1
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Translation": [
+            -4.0,
+            2.5,
+            1.0
+          ]
+        }
+      },
+      "Name": "PointLight",
+      "Parent": 0,
+      "UUID": 10865067605411497930
+    },
+    {
+      "Components": {
+        "LightComponent": {
+          "CastShadows": true,
+          "Color": [
+            0.4000000059604645,
+            0.6000000238418579,
+            1.0
+          ],
+          "InnerConeAngle": 0.3141592741012573,
+          "Intensity": 120.0,
+          "OuterConeAngle": 0.5585053563117981,
+          "Range": 14.0,
+          "ShadowBias": 0.0020000000949949026,
+          "ShadowSoftness": 1.0,
+          "Type": 2
+        },
+        "TransformComponent": {
+          "Rotation": [
+            -1.1344640254974365,
+            0.3490658402442932,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Translation": [
+            5.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
+      "Name": "SpotLight",
+      "Parent": 0,
+      "UUID": 4996284404124003269
+    },
+    {
+      "Components": {
+        "AudioListenerComponent": {
+          "Active": true
+        },
+        "CameraComponent": {
+          "OrthographicFar": 50.0,
+          "OrthographicNear": -50.0,
+          "OrthographicSize": 10.0,
+          "PerspectiveFar": 500.0,
+          "PerspectiveNear": 0.10000000149011612,
+          "Primary": true,
+          "Projection": 0,
+          "VerticalFOV": 0.8726646304130554
+        },
+        "TransformComponent": {
+          "Rotation": [
+            -0.3141592741012573,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Translation": [
+            0.0,
+            5.0,
+            12.0
+          ]
+        }
+      },
+      "Name": "MainCamera",
+      "Parent": 0,
+      "UUID": 17907699331416291212
+    },
+    {
+      "Components": {
+        "AudioListenerComponent": {
+          "Active": true
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "Name": "Listener",
+      "Parent": 0,
+      "UUID": 15008854211379534716
+    },
+    {
+      "Components": {
+        "AudioSourceComponent": {
+          "Clip": "Audio/hum.wav",
+          "Loop": true,
+          "MaxDistance": 30.0,
+          "MinDistance": 2.0,
+          "Pitch": 1.0,
+          "PlayOnStart": true,
+          "Spatial": true,
+          "Volume": 0.15000000596046448
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Translation": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        }
+      },
+      "Name": "AmbientSound",
+      "Parent": 0,
+      "UUID": 10304739405629701542
+    },
+    {
+      "Components": {
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/Roughness0.sfmat",
+          "Mesh": "builtin://Sphere",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.600000023841858,
+            1.600000023841858,
+            1.600000023841858
+          ],
+          "Translation": [
+            -4.0,
+            1.0,
+            -5.0
+          ]
+        }
+      },
+      "Name": "Sphere0",
+      "Parent": 0,
+      "UUID": 11805941628725420248
+    },
+    {
+      "Components": {
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/Roughness1.sfmat",
+          "Mesh": "builtin://Sphere",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.600000023841858,
+            1.600000023841858,
+            1.600000023841858
+          ],
+          "Translation": [
+            -2.0,
+            1.0,
+            -5.0
+          ]
+        }
+      },
+      "Name": "Sphere1",
+      "Parent": 0,
+      "UUID": 8212349989397835666
+    },
+    {
+      "Components": {
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/Roughness2.sfmat",
+          "Mesh": "builtin://Sphere",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.600000023841858,
+            1.600000023841858,
+            1.600000023841858
+          ],
+          "Translation": [
+            0.0,
+            1.0,
+            -5.0
+          ]
+        }
+      },
+      "Name": "Sphere2",
+      "Parent": 0,
+      "UUID": 15651116861173042934
+    },
+    {
+      "Components": {
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/Roughness3.sfmat",
+          "Mesh": "builtin://Sphere",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.600000023841858,
+            1.600000023841858,
+            1.600000023841858
+          ],
+          "Translation": [
+            2.0,
+            1.0,
+            -5.0
+          ]
+        }
+      },
+      "Name": "Sphere3",
+      "Parent": 0,
+      "UUID": 9249036580067332500
+    },
+    {
+      "Components": {
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/Roughness4.sfmat",
+          "Mesh": "builtin://Sphere",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.600000023841858,
+            1.600000023841858,
+            1.600000023841858
+          ],
+          "Translation": [
+            4.0,
+            1.0,
+            -5.0
+          ]
+        }
+      },
+      "Name": "Sphere4",
+      "Parent": 0,
+      "UUID": 4514581860632218515
+    },
+    {
+      "Components": {
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/Gold.sfmat",
+          "Mesh": "builtin://Sphere",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.5,
+            1.5,
+            1.5
+          ],
+          "Translation": [
+            -6.0,
+            1.0,
+            -2.0
+          ]
+        }
+      },
+      "Name": "GoldSphere",
+      "Parent": 0,
+      "UUID": 2715309504342219788
+    },
+    {
+      "Components": {
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/Mirror.sfmat",
+          "Mesh": "builtin://Sphere",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.5,
+            1.5,
+            1.5
+          ],
+          "Translation": [
+            6.0,
+            1.0,
+            -2.0
+          ]
+        }
+      },
+      "Name": "MirrorSphere",
+      "Parent": 0,
+      "UUID": 13906749135794661642
+    },
+    {
+      "Components": {
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/RedPlastic.sfmat",
+          "Mesh": "builtin://Capsule",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Translation": [
+            -7.0,
+            1.0,
+            2.0
+          ]
+        }
+      },
+      "Name": "PlasticCapsule",
+      "Parent": 0,
+      "UUID": 858998545791765362
+    },
+    {
+      "Components": {
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/Bumpy.sfmat",
+          "Mesh": "builtin://Cylinder",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.399999976158142,
+            2.0,
+            1.399999976158142
+          ],
+          "Translation": [
+            7.5,
+            1.0,
+            2.0
+          ]
+        }
+      },
+      "Name": "BumpyCylinder",
+      "Parent": 0,
+      "UUID": 11897906073343772879
+    },
+    {
+      "Components": {
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/RoughStone.sfmat",
+          "Mesh": "builtin://Cone",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.5,
+            2.0,
+            1.5
+          ],
+          "Translation": [
+            9.0,
+            1.0,
+            -3.0
+          ]
+        }
+      },
+      "Name": "Cone",
+      "Parent": 0,
+      "UUID": 14586963708496962218
+    },
+    {
+      "Components": {
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/Emissive.sfmat",
+          "Mesh": "builtin://Cube",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Translation": [
+            2.0,
+            0.5,
+            -3.0
+          ]
+        }
+      },
+      "Name": "EmissiveCube",
+      "Parent": 0,
+      "UUID": 16224888479960413010
+    },
+    {
+      "Components": {
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/Glass.sfmat",
+          "Mesh": "builtin://Sphere",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.7999999523162842,
+            1.7999999523162842,
+            1.7999999523162842
+          ],
+          "Translation": [
+            3.5,
+            1.0,
+            0.0
+          ]
+        }
+      },
+      "Name": "GlassSphere",
+      "Parent": 0,
+      "UUID": 8924435249672934699
+    },
+    {
+      "Components": {
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/MaskedLeaves.sfmat",
+          "Mesh": "builtin://Quad",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            2.5,
+            2.5,
+            2.5
+          ],
+          "Translation": [
+            -2.0,
+            1.2999999523162842,
+            -1.0
+          ]
+        }
+      },
+      "Name": "LeafPlane",
+      "Parent": 0,
+      "UUID": 5769473462230903864
+    },
+    {
+      "Components": {
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/Gold.sfmat",
+          "Mesh": "builtin://Cube",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "ScriptComponent": {
+          "Properties": {
+            "speed": 90.0
+          },
+          "Script": "Scripts/Spinner.lua"
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.2000000476837158,
+            1.2000000476837158,
+            1.2000000476837158
+          ],
+          "Translation": [
+            0.0,
+            2.200000047683716,
+            -2.0
+          ]
+        }
+      },
+      "Name": "SpinningCube",
+      "Parent": 0,
+      "UUID": 10419735466438673720
+    },
+    {
+      "Components": {
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "",
+          "Mesh": "Models/Cube.gltf#0",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Translation": [
+            9.0,
+            0.5,
+            3.0
+          ]
+        }
+      },
+      "Name": "ImportedModel",
+      "Parent": 0,
+      "UUID": 16416168801701675876
+    },
+    {
+      "Components": {
+        "ColliderComponent": {
+          "Friction": 0.5,
+          "IsTrigger": false,
+          "Offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Restitution": 0.0,
+          "Shape": 0,
+          "Size": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/Bumpy.sfmat",
+          "Mesh": "builtin://Cube",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "RigidBodyComponent": {
+          "AngularDamping": 0.05000000074505806,
+          "Continuous": false,
+          "GravityFactor": 1.0,
+          "LinearDamping": 0.05000000074505806,
+          "LockRotationX": false,
+          "LockRotationY": false,
+          "LockRotationZ": false,
+          "Mass": 2.0,
+          "Type": 2
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Translation": [
+            -9.0,
+            0.5,
+            4.0
+          ]
+        }
+      },
+      "Name": "Crate1",
+      "Parent": 0,
+      "UUID": 14475510215349212263
+    },
+    {
+      "Components": {
+        "ColliderComponent": {
+          "Friction": 0.5,
+          "IsTrigger": false,
+          "Offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Restitution": 0.0,
+          "Shape": 0,
+          "Size": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/Bumpy.sfmat",
+          "Mesh": "builtin://Cube",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "RigidBodyComponent": {
+          "AngularDamping": 0.05000000074505806,
+          "Continuous": false,
+          "GravityFactor": 1.0,
+          "LinearDamping": 0.05000000074505806,
+          "LockRotationX": false,
+          "LockRotationY": false,
+          "LockRotationZ": false,
+          "Mass": 2.0,
+          "Type": 2
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Translation": [
+            -9.0,
+            1.5499999523162842,
+            4.0
+          ]
+        }
+      },
+      "Name": "Crate2",
+      "Parent": 0,
+      "UUID": 17074422497917387928
+    },
+    {
+      "Components": {
+        "ColliderComponent": {
+          "Friction": 0.5,
+          "IsTrigger": false,
+          "Offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Restitution": 0.0,
+          "Shape": 0,
+          "Size": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/Bumpy.sfmat",
+          "Mesh": "builtin://Cube",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "RigidBodyComponent": {
+          "AngularDamping": 0.05000000074505806,
+          "Continuous": false,
+          "GravityFactor": 1.0,
+          "LinearDamping": 0.05000000074505806,
+          "LockRotationX": false,
+          "LockRotationY": false,
+          "LockRotationZ": false,
+          "Mass": 2.0,
+          "Type": 2
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Translation": [
+            -9.0,
+            2.5999999046325684,
+            4.0
+          ]
+        }
+      },
+      "Name": "Crate3",
+      "Parent": 0,
+      "UUID": 9014701423899090689
+    },
+    {
+      "Components": {
+        "ColliderComponent": {
+          "Friction": 0.5,
+          "IsTrigger": false,
+          "Offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Restitution": 0.0,
+          "Shape": 0,
+          "Size": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/Bumpy.sfmat",
+          "Mesh": "builtin://Cube",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "RigidBodyComponent": {
+          "AngularDamping": 0.05000000074505806,
+          "Continuous": false,
+          "GravityFactor": 1.0,
+          "LinearDamping": 0.05000000074505806,
+          "LockRotationX": false,
+          "LockRotationY": false,
+          "LockRotationZ": false,
+          "Mass": 2.0,
+          "Type": 2
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Translation": [
+            -9.0,
+            3.6499998569488525,
+            4.0
+          ]
+        }
+      },
+      "Name": "Crate4",
+      "Parent": 0,
+      "UUID": 9921686869467304199
+    },
+    {
+      "Components": {
+        "ColliderComponent": {
+          "Friction": 0.5,
+          "IsTrigger": false,
+          "Offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Restitution": 0.5,
+          "Shape": 1,
+          "Size": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/RedPlastic.sfmat",
+          "Mesh": "builtin://Sphere",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "RigidBodyComponent": {
+          "AngularDamping": 0.05000000074505806,
+          "Continuous": false,
+          "GravityFactor": 1.0,
+          "LinearDamping": 0.05000000074505806,
+          "LockRotationX": false,
+          "LockRotationY": false,
+          "LockRotationZ": false,
+          "Mass": 1.0,
+          "Type": 2
+        },
+        "ScriptComponent": {
+          "Properties": {},
+          "Script": "Scripts/Ball.lua"
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Translation": [
+            8.0,
+            7.0,
+            8.0
+          ]
+        }
+      },
+      "Name": "FallingBall",
+      "Parent": 0,
+      "UUID": 14900682311212183751
+    },
+    {
+      "Components": {
+        "ColliderComponent": {
+          "Friction": 0.5,
+          "IsTrigger": true,
+          "Offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Restitution": 0.0,
+          "Shape": 0,
+          "Size": [
+            3.0,
+            2.0,
+            3.0
+          ]
+        },
+        "ScriptComponent": {
+          "Properties": {},
+          "Script": "Scripts/Zone.lua"
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Translation": [
+            8.0,
+            3.5,
+            8.0
+          ]
+        }
+      },
+      "Name": "TriggerZone",
+      "Parent": 0,
+      "UUID": 11665050061133912523
+    },
+    {
+      "Components": {
+        "ColliderComponent": {
+          "Friction": 0.5,
+          "IsTrigger": false,
+          "Offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Restitution": 0.0,
+          "Shape": 0,
+          "Size": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/RoughStone.sfmat",
+          "Mesh": "builtin://Cube",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "RigidBodyComponent": {
+          "AngularDamping": 0.05000000074505806,
+          "Continuous": false,
+          "GravityFactor": 1.0,
+          "LinearDamping": 0.05000000074505806,
+          "LockRotationX": false,
+          "LockRotationY": false,
+          "LockRotationZ": false,
+          "Mass": 1.0,
+          "Type": 1
+        },
+        "ScriptComponent": {
+          "Properties": {},
+          "Script": "Scripts/Mover.lua"
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            3.0,
+            0.4000000059604645,
+            2.0
+          ],
+          "Translation": [
+            0.0,
+            0.30000001192092896,
+            6.0
+          ]
+        }
+      },
+      "Name": "MovingPlatform",
+      "Parent": 0,
+      "UUID": 6244322363237657522
+    },
+    {
+      "Components": {
+        "ColliderComponent": {
+          "Friction": 0.800000011920929,
+          "IsTrigger": false,
+          "Offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Restitution": 0.0,
+          "Shape": 1,
+          "Size": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/Gold.sfmat",
+          "Mesh": "builtin://Sphere",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "RigidBodyComponent": {
+          "AngularDamping": 0.5,
+          "Continuous": true,
+          "GravityFactor": 1.0,
+          "LinearDamping": 0.05000000074505806,
+          "LockRotationX": false,
+          "LockRotationY": false,
+          "LockRotationZ": false,
+          "Mass": 2.0,
+          "Type": 2
+        },
+        "ScriptComponent": {
+          "Properties": {},
+          "Script": "Scripts/Player.lua"
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Translation": [
+            0.0,
+            1.0,
+            4.0
+          ]
+        }
+      },
+      "Name": "Player",
+      "Parent": 0,
+      "UUID": 12379438173509254423
+    },
+    {
+      "Components": {
+        "ColliderComponent": {
+          "Friction": 0.5,
+          "IsTrigger": false,
+          "Offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Restitution": 0.0,
+          "Shape": 2,
+          "Size": [
+            1.0,
+            2.0,
+            1.0
+          ]
+        },
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/Gold.sfmat",
+          "Mesh": "builtin://Capsule",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "RigidBodyComponent": {
+          "AngularDamping": 0.05000000074505806,
+          "Continuous": false,
+          "GravityFactor": 1.0,
+          "LinearDamping": 0.05000000074505806,
+          "LockRotationX": true,
+          "LockRotationY": false,
+          "LockRotationZ": false,
+          "Mass": 1.5,
+          "Type": 2
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Translation": [
+            6.0,
+            3.0,
+            5.0
+          ]
+        }
+      },
+      "Name": "CapsuleBody",
+      "Parent": 0,
+      "UUID": 5276280551938537931
+    },
+    {
+      "Components": {
+        "ScriptComponent": {
+          "Properties": {},
+          "Script": "Scripts/Spinner.lua"
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Translation": [
+            -9.0,
+            3.0,
+            -4.0
+          ]
+        }
+      },
+      "Name": "RotatingParent",
+      "Parent": 0,
+      "UUID": 9513415435229941319
+    },
+    {
+      "Components": {
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/Gold.sfmat",
+          "Mesh": "builtin://Cube",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            0.6000000238418579,
+            0.6000000238418579,
+            0.6000000238418579
+          ],
+          "Translation": [
+            1.5,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "Name": "ChildA",
+      "Parent": 9513415435229941319,
+      "UUID": 4202118852934649426
+    },
+    {
+      "Components": {
+        "MeshRendererComponent": {
+          "CastShadows": true,
+          "Material": "Materials/RedPlastic.sfmat",
+          "Mesh": "builtin://Sphere",
+          "ReceiveShadows": true,
+          "Visible": true
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            0.6000000238418579,
+            0.6000000238418579,
+            0.6000000238418579
+          ],
+          "Translation": [
+            -1.5,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "Name": "ChildB",
+      "Parent": 9513415435229941319,
+      "UUID": 1050197896751146404
+    },
+    {
+      "Components": {
+        "ScriptComponent": {
+          "Properties": {},
+          "Script": "Scripts/SelfTest.lua"
+        },
+        "TransformComponent": {
+          "Rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "Name": "SelfTest",
+      "Parent": 0,
+      "UUID": 13644564430583873953
+    }
+  ],
+  "Name": "Main",
+  "Settings": {
+    "Environment": {
+      "GroundColor": [
+        0.25,
+        0.2199999988079071,
+        0.20000000298023224
+      ],
+      "HDRI": "HDRI/studio.hdr",
+      "Intensity": 0.8999999761581421,
+      "RotationDegrees": 20.0,
+      "ShowSkybox": true,
+      "SkyColor": [
+        0.3499999940395355,
+        0.550000011920929,
+        0.8500000238418579
+      ]
+    },
+    "Gravity": [
+      0.0,
+      -9.8100004196167,
+      0.0
+    ],
+    "PostProcess": {
+      "Exposure": 0.800000011920929,
+      "SSAOEnabled": true,
+      "SSAOIntensity": 1.2000000476837158,
+      "SSAORadius": 0.6000000238418579,
+      "SSAOSamples": 16,
+      "Tonemapper": 2
+    },
+    "Shadows": {
+      "CascadeCount": 4,
+      "CascadeSplitLambda": 0.800000011920929,
+      "MapSize": 2048,
+      "MaxDistance": 80.0
+    }
+  },
+  "Type": "Scene",
+  "Version": 1
+}

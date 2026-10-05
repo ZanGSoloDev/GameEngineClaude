@@ -1,0 +1,5 @@
+{
+    "AssetDirectory": "Assets",
+    "Name": "TestProject",
+    "StartScene": "Scenes/Main.sfscene"
+}

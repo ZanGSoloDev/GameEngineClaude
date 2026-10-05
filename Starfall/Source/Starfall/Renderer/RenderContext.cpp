@@ -219,3 +219,43 @@ namespace Starfall {
 	}
 
 }
+
+namespace Starfall {
+
+	void RenderContext::Blit(nvrhi::ICommandList* commandList, nvrhi::ITexture* source, nvrhi::IFramebuffer* destination)
+	{
+		if(!source || !destination)
+			return;
+		const nvrhi::FramebufferInfoEx& info = destination->getFramebufferInfo();
+		if(!m_BlitPipeline || !(m_BlitFramebufferInfo == info))
+		{
+			nvrhi::RenderState state;
+			state.rasterState.setCullNone();
+			state.depthStencilState.setDepthTestEnable(false).setDepthWriteEnable(false);
+			nvrhi::GraphicsPipelineDesc desc;
+			desc.setPrimType(nvrhi::PrimitiveType::TriangleList).setRenderState(state);
+			desc.setVertexShader(GetShader("fullscreen.vert")).setPixelShader(GetShader("blit.frag"));
+			desc.addBindingLayout(m_ImGuiLayout);
+			m_BlitPipeline = GetDevice()->createGraphicsPipeline(desc, destination);
+			m_BlitFramebufferInfo = info;
+		}
+		if(!m_BlitPipeline)
+			return;
+
+		nvrhi::BindingSetDesc set;
+		set.addItem(nvrhi::BindingSetItem::Texture_SRV(0, source));
+		set.addItem(nvrhi::BindingSetItem::Sampler(1, m_LinearClamp));
+		set.addItem(nvrhi::BindingSetItem::PushConstants(0, sizeof(float) * 4));
+		nvrhi::BindingSetHandle bindings = GetDevice()->createBindingSet(set, m_ImGuiLayout);
+
+		nvrhi::GraphicsState state;
+		state.setPipeline(m_BlitPipeline).setFramebuffer(destination);
+		state.setViewport(nvrhi::ViewportState().addViewportAndScissorRect(nvrhi::Viewport(static_cast<float>(info.width), static_cast<float>(info.height))));
+		state.addBindingSet(bindings);
+		commandList->setGraphicsState(state);
+		float push[4] = {};
+		commandList->setPushConstants(push, sizeof(push));
+		commandList->draw(nvrhi::DrawArguments().setVertexCount(3));
+	}
+
+}

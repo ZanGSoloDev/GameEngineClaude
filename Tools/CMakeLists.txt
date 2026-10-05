@@ -23,3 +23,7 @@ function(starfall_compile_shaders TARGET SHADER_DIR OUTPUT_DIR)
 	set_target_properties(${TARGET}_Shaders PROPERTIES FOLDER "Tools")
 	add_dependencies(${TARGET} ${TARGET}_Shaders)
 endfunction()
+
+add_executable(GenerateTestProject GenerateTestProject/main.cpp)
+target_link_libraries(GenerateTestProject PRIVATE Starfall)
+set_target_properties(GenerateTestProject PROPERTIES FOLDER "Tools" RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/tools)
