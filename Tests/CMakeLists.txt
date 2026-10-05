@@ -1,0 +1,6 @@
+file(GLOB_RECURSE TEST_SOURCES CONFIGURE_DEPENDS *.cpp)
+add_executable(StarfallTests ${TEST_SOURCES})
+target_include_directories(StarfallTests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(StarfallTests PRIVATE Starfall doctest::doctest)
+target_compile_definitions(StarfallTests PRIVATE STARFALL_TEST_ASSET_DIR="${CMAKE_SOURCE_DIR}/Assets")
+add_test(NAME StarfallTests COMMAND StarfallTests WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})

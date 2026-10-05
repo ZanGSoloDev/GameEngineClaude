@@ -1,0 +1,8 @@
+/Build/
+/Out/
+/.vs/
+/.vscode/
+*.user
+*.log
+/Imgui.ini
+imgui.ini

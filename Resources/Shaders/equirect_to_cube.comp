@@ -1,0 +1,39 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+
+// Resamples a lat-long (equirectangular) HDR image into one mip level of a cube map.
+// The panorama center (u = 0.5) faces -Z.
+
+#include "Ibl.glsl"
+
+layout(local_size_x = 8, local_size_y = 8, local_size_z = 1) in;
+
+layout(set = 0, binding = 0) uniform texture2D uSource;
+layout(set = 0, binding = 1) uniform sampler uSampler;
+layout(set = 0, binding = 2, rgba16f) uniform writeonly image2DArray uDest;
+
+layout(push_constant) uniform PushBlock
+{
+	vec4 Params; // x destination size, y source lod bias
+} Push;
+
+void main()
+{
+	uvec3 id = gl_GlobalInvocationID;
+	uint size = uint(Push.Params.x);
+	if(id.x >= size || id.y >= size)
+		return;
+
+	vec2 uv = (vec2(id.xy) + 0.5) / float(size);
+	vec3 dir = CubeDirection(id.z, uv);
+	vec2 equirectUV = vec2(atan(dir.x, -dir.z) / (2.0 * PI) + 0.5, acos(clamp(dir.y, -1.0, 1.0)) / PI);
+
+	// Pick the source mip whose texel footprint matches the destination texel footprint.
+	vec2 sourceSize = vec2(textureSize(sampler2D(uSource, uSampler), 0));
+	float destTexelAngle = (PI * 0.5) / float(size);
+	float sourceTexelAngle = (2.0 * PI) / sourceSize.x;
+	float lod = max(log2(destTexelAngle / sourceTexelAngle), 0.0) + Push.Params.y;
+
+	vec3 color = textureLod(sampler2D(uSource, uSampler), equirectUV, lod).rgb;
+	imageStore(uDest, ivec3(id), vec4(min(color, vec3(60000.0)), 1.0));
+}

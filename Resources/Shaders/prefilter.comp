@@ -1,0 +1,63 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+
+// Specular environment prefilter (split-sum, GGX importance sampling with mip-filtered samples to avoid fireflies).
+
+#include "Ibl.glsl"
+
+layout(local_size_x = 8, local_size_y = 8, local_size_z = 1) in;
+
+layout(set = 0, binding = 0) uniform textureCube uEnvironment;
+layout(set = 0, binding = 1) uniform sampler uSampler;
+layout(set = 0, binding = 2, rgba16f) uniform writeonly image2DArray uDest;
+
+layout(push_constant) uniform PushBlock
+{
+	vec4 Params; // x destination size, y roughness, z source cube size
+} Push;
+
+void main()
+{
+	uvec3 id = gl_GlobalInvocationID;
+	uint size = uint(Push.Params.x);
+	if(id.x >= size || id.y >= size)
+		return;
+
+	float roughness = Push.Params.y;
+	vec2 uv = (vec2(id.xy) + 0.5) / float(size);
+	vec3 N = CubeDirection(id.z, uv);
+	vec3 V = N;
+
+	const uint sampleCount = 1024u;
+	float sourceTexelSolidAngle = 4.0 * PI / (6.0 * Push.Params.z * Push.Params.z);
+
+	vec3 color = vec3(0.0);
+	float weight = 0.0;
+	if(roughness < 0.001)
+	{
+		color = textureLod(samplerCube(uEnvironment, uSampler), N, 0.0).rgb;
+		weight = 1.0;
+	}
+	else
+	{
+		for(uint i = 0u; i < sampleCount; i++)
+		{
+			vec2 xi = Hammersley(i, sampleCount);
+			vec3 H = ImportanceSampleGGX(xi, N, roughness);
+			vec3 L = normalize(2.0 * dot(V, H) * H - V);
+			float NdotL = max(dot(N, L), 0.0);
+			if(NdotL > 0.0)
+			{
+				float NdotH = max(dot(N, H), 0.0);
+				float HdotV = max(dot(H, V), 0.0);
+				float D = DistributionGGX(NdotH, roughness);
+				float pdf = D * NdotH / (4.0 * HdotV + 1e-4) + 1e-4;
+				float sampleSolidAngle = 1.0 / (float(sampleCount) * pdf + 1e-4);
+				float lod = max(0.5 * log2(sampleSolidAngle / sourceTexelSolidAngle) + 1.0, 0.0);
+				color += textureLod(samplerCube(uEnvironment, uSampler), L, lod).rgb * NdotL;
+				weight += NdotL;
+			}
+		}
+	}
+	imageStore(uDest, ivec3(id), vec4(color / max(weight, 1e-4), 1.0));
+}

@@ -1,0 +1,42 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+
+// Procedural sky: gradient from the zenith color through a bright horizon to the ground color, plus a soft sun glow.
+
+#include "Ibl.glsl"
+
+layout(local_size_x = 8, local_size_y = 8, local_size_z = 1) in;
+
+layout(set = 0, binding = 2, rgba16f) uniform writeonly image2DArray uDest;
+
+layout(push_constant) uniform PushBlock
+{
+	vec4 SkyColor;     // rgb zenith color, w destination size
+	vec4 GroundColor;  // rgb
+	vec4 SunDirection; // xyz towards the sun, w intensity (0 = no sun glow)
+} Push;
+
+void main()
+{
+	uvec3 id = gl_GlobalInvocationID;
+	uint size = uint(Push.SkyColor.w);
+	if(id.x >= size || id.y >= size)
+		return;
+
+	vec2 uv = (vec2(id.xy) + 0.5) / float(size);
+	vec3 dir = CubeDirection(id.z, uv);
+
+	vec3 horizon = mix(Push.SkyColor.rgb, vec3(1.0), 0.45);
+	vec3 color;
+	if(dir.y >= 0.0)
+		color = mix(horizon, Push.SkyColor.rgb, pow(clamp(dir.y, 0.0, 1.0), 0.55));
+	else
+		color = mix(horizon * 0.8, Push.GroundColor.rgb, pow(clamp(-dir.y, 0.0, 1.0), 0.4));
+
+	if(Push.SunDirection.w > 0.0)
+	{
+		float c = max(dot(dir, normalize(Push.SunDirection.xyz)), 0.0);
+		color += vec3(1.0, 0.9, 0.7) * (pow(c, 256.0) * 4.0 + pow(c, 8.0) * 0.15) * Push.SunDirection.w;
+	}
+	imageStore(uDest, ivec3(id), vec4(color, 1.0));
+}

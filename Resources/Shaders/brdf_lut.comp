@@ -1,0 +1,56 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+
+// Split-sum BRDF integration LUT: x = NdotV, y = roughness; outputs scale and bias applied to F0.
+
+#include "Ibl.glsl"
+
+layout(local_size_x = 8, local_size_y = 8, local_size_z = 1) in;
+
+layout(set = 0, binding = 2, rg16f) uniform writeonly image2D uDest;
+
+layout(push_constant) uniform PushBlock
+{
+	vec4 Params; // x size
+} Push;
+
+float GeometrySchlickGGX(float NdotV, float roughness)
+{
+	float k = (roughness * roughness) / 2.0;
+	return NdotV / (NdotV * (1.0 - k) + k);
+}
+
+void main()
+{
+	uvec2 id = gl_GlobalInvocationID.xy;
+	uint size = uint(Push.Params.x);
+	if(id.x >= size || id.y >= size)
+		return;
+
+	float NdotV = max((float(id.x) + 0.5) / float(size), 1e-3);
+	float roughness = max((float(id.y) + 0.5) / float(size), 0.02);
+	vec3 V = vec3(sqrt(1.0 - NdotV * NdotV), 0.0, NdotV);
+	vec3 N = vec3(0.0, 0.0, 1.0);
+
+	float A = 0.0;
+	float B = 0.0;
+	const uint sampleCount = 1024u;
+	for(uint i = 0u; i < sampleCount; i++)
+	{
+		vec2 xi = Hammersley(i, sampleCount);
+		vec3 H = ImportanceSampleGGX(xi, N, roughness);
+		vec3 L = normalize(2.0 * dot(V, H) * H - V);
+		float NdotL = max(L.z, 0.0);
+		float NdotH = max(H.z, 0.0);
+		float VdotH = max(dot(V, H), 0.0);
+		if(NdotL > 0.0)
+		{
+			float G = GeometrySchlickGGX(NdotV, roughness) * GeometrySchlickGGX(NdotL, roughness);
+			float Gvis = G * VdotH / (NdotH * NdotV + 1e-5);
+			float Fc = pow(1.0 - VdotH, 5.0);
+			A += (1.0 - Fc) * Gvis;
+			B += Fc * Gvis;
+		}
+	}
+	imageStore(uDest, ivec2(id), vec4(A / float(sampleCount), B / float(sampleCount), 0.0, 0.0));
+}
