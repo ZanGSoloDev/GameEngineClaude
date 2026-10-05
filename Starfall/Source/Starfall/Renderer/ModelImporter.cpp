@@ -253,6 +253,21 @@ namespace Starfall {
 			}
 			CgltfPtr data(raw);
 
+			// External buffers must stay inside the model directory (cgltf would otherwise read any relative or absolute path).
+			for(cgltf_size i = 0; i < data->buffers_count; i++)
+			{
+				const char* uri = data->buffers[i].uri;
+				if(!uri || std::strncmp(uri, "data:", 5) == 0)
+					continue;
+				std::string decoded = DecodeUriPath(uri);
+				std::filesystem::path relative = std::filesystem::path(std::u8string(decoded.begin(), decoded.end())).lexically_normal();
+				if(relative.is_absolute() || relative.has_root_name() || (!relative.empty() && *relative.begin() == ".."))
+				{
+					SF_CORE_ERROR("glTF buffer '{0}' points outside the model directory; refusing to load '{1}'", uri, assetPath);
+					return nullptr;
+				}
+			}
+
 			// External buffers resolve relative to a (virtual) file inside the resource directory.
 			std::string virtualFile = (resourceDirectory / "model.gltf").string();
 			if(cgltf_load_buffers(&options, data.get(), virtualFile.c_str()) != cgltf_result_success)

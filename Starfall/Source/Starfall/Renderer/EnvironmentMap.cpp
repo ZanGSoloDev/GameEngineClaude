@@ -144,7 +144,7 @@ namespace Starfall {
 		else
 		{
 			if(!settings.HDRI.empty())
-				key = "sky-fallback:" + settings.HDRI; // failed HDRI load: show the procedural sky and do not retry every frame
+				SF_CORE_WARN("HDRI '{0}' could not be loaded; using the procedural sky", settings.HDRI); // the key is kept so this is not retried every frame
 			BuildProcedural(commandList, settings);
 		}
 		FilterEnvironment(commandList);

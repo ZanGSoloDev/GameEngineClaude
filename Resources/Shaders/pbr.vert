@@ -17,6 +17,8 @@ layout(push_constant) uniform PushBlock
 	vec4 Params;     // x: 1 if the model matrix flips winding (negative determinant)
 } Push;
 
+invariant gl_Position; // must match prepass.vert exactly: the forward pass depth-tests against the prepass depth
+
 layout(location = 0) out vec3 vWorldPos;
 layout(location = 1) out vec3 vNormal;
 layout(location = 2) out vec4 vTangent;

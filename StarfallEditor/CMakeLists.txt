@@ -1,0 +1,8 @@
+file(GLOB_RECURSE EDITOR_SOURCES CONFIGURE_DEPENDS Source/*.cpp Source/*.h)
+add_executable(StarfallEditor ${EDITOR_SOURCES})
+target_include_directories(StarfallEditor PRIVATE Source)
+target_link_libraries(StarfallEditor PRIVATE Starfall imgui_lib)
+if(MSVC)
+	target_compile_options(StarfallEditor PRIVATE /W4 /permissive- /utf-8 /MP)
+endif()
+add_dependencies(StarfallEditor StarfallRuntime)

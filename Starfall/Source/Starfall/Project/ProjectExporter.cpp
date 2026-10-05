@@ -83,7 +83,9 @@ namespace Starfall {
 			result.Message = "Failed to copy engine resources: " + ec.message();
 			return result;
 		}
-		fs::remove_all(out / "Assets", ec);
+		// Only replace an Assets folder that a previous export created; never delete an unrelated user folder.
+		if(fs::exists(out / "Game.sfproj", ec))
+			fs::remove_all(out / "Assets", ec);
 		fs::copy(assetDirectory, out / "Assets", options, ec);
 		if(ec)
 		{

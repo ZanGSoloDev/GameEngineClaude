@@ -209,25 +209,41 @@ namespace Starfall {
 	void AssetManager::ReleaseGPU()
 	{
 		Cache& cache = GetCache();
+		auto releaseMaterial = [](const Ref<Material>& material) {
+			if(!material)
+				return;
+			material->ConstantBuffer = nullptr;
+			material->BindingSet = nullptr;
+			material->MarkDirty();
+			for(size_t slot = 0; slot < static_cast<size_t>(TextureSlot::Count); slot++)
+				if(const Ref<Texture2D>& texture = material->GetTexture(static_cast<TextureSlot>(slot)))
+					texture->ReleaseGPU();
+		};
+		auto releaseMesh = [&](const Ref<Mesh>& mesh) {
+			if(!mesh)
+				return;
+			mesh->ReleaseGPU();
+			releaseMaterial(mesh->GetDefaultMaterial());
+		};
+
 		for(auto& [key, mesh] : cache.Meshes)
-			if(mesh)
-				mesh->ReleaseGPU();
+			releaseMesh(mesh);
 		for(auto& [key, tex] : cache.Textures)
 			if(tex)
 				tex->ReleaseGPU();
 		for(auto& [key, mat] : cache.Materials)
-			if(mat)
-			{
-				mat->ConstantBuffer = nullptr;
-				mat->BindingSet = nullptr;
-				mat->MarkDirty();
-			}
-		if(cache.DefaultMaterial)
+			releaseMaterial(mat);
+		// Models own meshes/materials/textures that are not in the other caches.
+		for(auto& [key, model] : cache.Models)
 		{
-			cache.DefaultMaterial->ConstantBuffer = nullptr;
-			cache.DefaultMaterial->BindingSet = nullptr;
-			cache.DefaultMaterial->MarkDirty();
+			if(!model)
+				continue;
+			for(const Ref<Mesh>& mesh : model->Meshes)
+				releaseMesh(mesh);
+			for(const Ref<Material>& material : model->Materials)
+				releaseMaterial(material);
 		}
+		releaseMaterial(cache.DefaultMaterial);
 		if(cache.White) cache.White->ReleaseGPU();
 		if(cache.FlatNormal) cache.FlatNormal->ReleaseGPU();
 	}

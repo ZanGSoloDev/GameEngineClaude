@@ -134,11 +134,13 @@ namespace Starfall {
 		}
 
 		m_Device->WaitIdle();
+		commandList = nullptr; // must be released before the device is destroyed
 		OnShutdown();
 		m_ImGui.reset();
 		if(m_Desc.UseImGui)
 			ImGui::DestroyContext();
 		AudioEngine::Shutdown();
+		AssetManager::Clear();
 		m_Context.reset();
 		m_Device.reset();
 		m_Window.reset();

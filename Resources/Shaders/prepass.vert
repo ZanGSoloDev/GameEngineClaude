@@ -17,6 +17,8 @@ layout(push_constant) uniform PushBlock
 	vec4 Params;
 } Push;
 
+invariant gl_Position; // must match pbr.vert exactly (depth equality with the forward pass)
+
 layout(location = 0) out vec3 vViewNormal;
 layout(location = 1) out vec2 vUV;
 

@@ -344,6 +344,15 @@ namespace Starfall {
 			MakeRenderState(Cull::None, false, false, nvrhi::ComparisonFunc::Always, false), m_MeshInputLayout);
 		p.OutlineComposite = make(m_Context.GetShader("fullscreen.vert"), m_Context.GetShader("outline.frag"), { global, m_OutlineLayout }, m_FbLdr,
 			MakeRenderState(Cull::None, false, false, nvrhi::ComparisonFunc::Always, true), nullptr);
+
+		const std::pair<const char*, nvrhi::IGraphicsPipeline*> all[] = {
+			{ "Shadow", p.Shadow }, { "ShadowMasked", p.ShadowMasked }, { "Prepass", p.Prepass[0] }, { "PrepassDS", p.Prepass[1] }, { "Forward", p.Forward[0] },
+			{ "ForwardDS", p.Forward[1] }, { "Transparent", p.Transparent[0] }, { "TransparentDS", p.Transparent[1] }, { "Sky", p.Sky }, { "Ssao", p.Ssao },
+			{ "SsaoBlur", p.SsaoBlur }, { "Tonemap", p.Tonemap }, { "Grid", p.Grid }, { "LinesDepth", p.LinesDepth }, { "LinesOverlay", p.LinesOverlay },
+			{ "OutlineMask", p.OutlineMask }, { "OutlineComposite", p.OutlineComposite } };
+		for(const auto& [name, pipeline] : all)
+			if(!pipeline)
+				SF_CORE_ERROR("Failed to create the '{0}' pipeline", name);
 	}
 
 	void SceneRenderer::SetViewport(nvrhi::GraphicsState& state, uint32_t width, uint32_t height) const

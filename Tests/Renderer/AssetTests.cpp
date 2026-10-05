@@ -418,3 +418,14 @@ TEST_CASE("InstantiateModel builds an entity hierarchy referencing model meshes"
 	CHECK_FALSE(InstantiateModel(scene, "Models/none.gltf", Entity()));
 	AssetManager::Clear();
 }
+
+TEST_CASE("glTF with a buffer outside the model directory is rejected")
+{
+	TestProject project;
+	project.Write("Secret.bin", "0123456789012345678901234567890123456789");
+	std::string gltf = R"({"asset":{"version":"2.0"},"buffers":[{"byteLength":40,"uri":"../Secret.bin"}]})";
+	project.Write("Models/Evil.gltf", gltf);
+	AssetManager::Clear();
+	CHECK(AssetManager::GetModel("Models/Evil.gltf") == nullptr);
+	AssetManager::Clear();
+}

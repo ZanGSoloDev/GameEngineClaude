@@ -66,6 +66,6 @@ FetchContent_Declare(imguizmo GIT_REPOSITORY https://github.com/CedricGuillemet/
 
 # ---- Asset import: glTF, images ----
 FetchContent_Declare(cgltf GIT_REPOSITORY https://github.com/jkuhlmann/cgltf.git GIT_TAG v1.14 GIT_SHALLOW TRUE SOURCE_SUBDIR _no_cmake_)
-FetchContent_Declare(stb GIT_REPOSITORY https://github.com/nothings/stb.git GIT_TAG master GIT_SHALLOW TRUE SOURCE_SUBDIR _no_cmake_)
+FetchContent_Declare(stb GIT_REPOSITORY https://github.com/nothings/stb.git GIT_TAG 2c980bb59875b0d32144a71867fbdebb2f77cd20 SOURCE_SUBDIR _no_cmake_)
 
 FetchContent_MakeAvailable(glfw glm doctest nlohmann_json nvrhi glslang JoltPhysics lua sol2 miniaudio imgui imguizmo cgltf stb)

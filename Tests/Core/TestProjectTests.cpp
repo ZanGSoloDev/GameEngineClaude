@@ -92,6 +92,17 @@ TEST_CASE("Feature test project: runs headless and the Lua API self test passes"
 	Project::Unload();
 }
 
+TEST_CASE("Exporting never deletes an unrelated Assets folder")
+{
+	TestProject scratch;
+	std::filesystem::path out = scratch.Root() / "Export";
+	FileSystem::WriteText(out / "Assets" / "KeepMe.txt", "user data");
+	FileSystem::WriteText(scratch.Root() / "Runtime.exe", "binary");
+	FileSystem::WriteText(scratch.Root() / "Resources" / "Shaders" / "x.spv", "spv");
+	REQUIRE(ExportProject(TestProjectFile(), out, scratch.Root() / "Runtime.exe", scratch.Root() / "Resources").Success);
+	CHECK(std::filesystem::exists(out / "Assets" / "KeepMe.txt"));
+}
+
 TEST_CASE("Exporting the feature test project produces a runnable game folder layout")
 {
 	TestProject scratch; // only used for a unique temp directory
