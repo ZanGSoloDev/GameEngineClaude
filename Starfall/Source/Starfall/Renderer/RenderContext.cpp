@@ -58,16 +58,16 @@ namespace Starfall {
 			.setAddressW(nvrhi::SamplerAddressMode::Clamp));
 
 		nvrhi::BindingLayoutDesc global;
-		global.setVisibility(nvrhi::ShaderType::All).setBindingOffsets(ZeroBindingOffsets());
+		global.setVisibility(nvrhi::ShaderType::All).setBindingOffsets(ZeroBindingOffsets()).setRegisterSpaceAndDescriptorSet(0);
 		global.addItem(nvrhi::BindingLayoutItem::VolatileConstantBuffer(0));
 		global.addItem(nvrhi::BindingLayoutItem::Sampler(1));
 		global.addItem(nvrhi::BindingLayoutItem::Sampler(2));
 		global.addItem(nvrhi::BindingLayoutItem::Sampler(3));
-		global.addItem(nvrhi::BindingLayoutItem::PushConstants(0, sizeof(MeshPushConstants)));
+		global.addItem(nvrhi::BindingLayoutItem::PushConstants(4, sizeof(MeshPushConstants)));
 		m_GlobalLayout = device->createBindingLayout(global);
 
 		nvrhi::BindingLayoutDesc material;
-		material.setVisibility(nvrhi::ShaderType::Pixel).setBindingOffsets(ZeroBindingOffsets());
+		material.setVisibility(nvrhi::ShaderType::Pixel).setBindingOffsets(ZeroBindingOffsets()).setRegisterSpaceAndDescriptorSet(2);
 		material.addItem(nvrhi::BindingLayoutItem::ConstantBuffer(0));
 		for(uint32_t i = 1; i <= 5; i++)
 			material.addItem(nvrhi::BindingLayoutItem::Texture_SRV(i));
@@ -75,7 +75,7 @@ namespace Starfall {
 		m_MaterialLayout = device->createBindingLayout(material);
 
 		nvrhi::BindingLayoutDesc imgui;
-		imgui.setVisibility(nvrhi::ShaderType::All).setBindingOffsets(ZeroBindingOffsets());
+		imgui.setVisibility(nvrhi::ShaderType::All).setBindingOffsets(ZeroBindingOffsets()).setRegisterSpaceAndDescriptorSet(0);
 		imgui.addItem(nvrhi::BindingLayoutItem::Texture_SRV(0));
 		imgui.addItem(nvrhi::BindingLayoutItem::Sampler(1));
 		imgui.addItem(nvrhi::BindingLayoutItem::PushConstants(0, sizeof(float) * 4));

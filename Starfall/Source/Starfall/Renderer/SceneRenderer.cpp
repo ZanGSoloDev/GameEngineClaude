@@ -69,6 +69,15 @@ namespace Starfall {
 			return state;
 		}
 
+		// Pipelines using the global layout declare 128 bytes of push constants; fullscreen passes only fill a vec4.
+		void SetSmallPush(nvrhi::ICommandList* commandList, const glm::vec4* data)
+		{
+			MeshPushConstants push{};
+			if(data)
+				push.Model[0] = *data;
+			commandList->setPushConstants(&push, sizeof(push));
+		}
+
 		glm::mat3 NormalMatrixOf(const glm::mat4& model)
 		{
 			glm::mat3 m(model);
@@ -116,12 +125,12 @@ namespace Starfall {
 
 		// Layouts for the individual passes (set 0 is always the global layout; see RenderContext).
 		nvrhi::BindingLayoutDesc shadow;
-		shadow.setVisibility(nvrhi::ShaderType::Vertex).setBindingOffsets(ZeroBindingOffsets());
+		shadow.setVisibility(nvrhi::ShaderType::Vertex).setBindingOffsets(ZeroBindingOffsets()).setRegisterSpaceAndDescriptorSet(0);
 		shadow.addItem(nvrhi::BindingLayoutItem::PushConstants(0, sizeof(glm::mat4)));
 		m_ShadowLayout = device->createBindingLayout(shadow);
 
 		nvrhi::BindingLayoutDesc scene;
-		scene.setVisibility(nvrhi::ShaderType::Pixel).setBindingOffsets(ZeroBindingOffsets());
+		scene.setVisibility(nvrhi::ShaderType::Pixel).setBindingOffsets(ZeroBindingOffsets()).setRegisterSpaceAndDescriptorSet(1);
 		scene.addItem(nvrhi::BindingLayoutItem::StructuredBuffer_SRV(0));
 		for(uint32_t i = 1; i <= 6; i++)
 			scene.addItem(nvrhi::BindingLayoutItem::Texture_SRV(i));
@@ -129,7 +138,7 @@ namespace Starfall {
 
 		auto singleTexture = [&](uint32_t count) {
 			nvrhi::BindingLayoutDesc desc;
-			desc.setVisibility(nvrhi::ShaderType::Pixel).setBindingOffsets(ZeroBindingOffsets());
+			desc.setVisibility(nvrhi::ShaderType::Pixel).setBindingOffsets(ZeroBindingOffsets()).setRegisterSpaceAndDescriptorSet(1);
 			for(uint32_t i = 0; i < count; i++)
 				desc.addItem(nvrhi::BindingLayoutItem::Texture_SRV(i));
 			return device->createBindingLayout(desc);
@@ -234,7 +243,7 @@ namespace Starfall {
 		global.addItem(nvrhi::BindingSetItem::Sampler(1, m_Context.GetLinearClampSampler()));
 		global.addItem(nvrhi::BindingSetItem::Sampler(2, m_Context.GetShadowCompareSampler()));
 		global.addItem(nvrhi::BindingSetItem::Sampler(3, m_Context.GetPointClampSampler()));
-		global.addItem(nvrhi::BindingSetItem::PushConstants(0, sizeof(MeshPushConstants)));
+		global.addItem(nvrhi::BindingSetItem::PushConstants(4, sizeof(MeshPushConstants)));
 		m_GlobalSet = device->createBindingSet(global, m_Context.GetGlobalLayout());
 
 		nvrhi::BindingSetDesc shadow;
@@ -716,8 +725,7 @@ namespace Starfall {
 			state.addBindingSet(m_GlobalSet);
 			state.addBindingSet(inputs);
 			commandList->setGraphicsState(state);
-			if(push)
-				commandList->setPushConstants(push, sizeof(*push));
+			SetSmallPush(commandList, push);
 			commandList->draw(nvrhi::DrawArguments().setVertexCount(3));
 		};
 		pass(m_Pipelines->Ssao, m_FbAo[0], m_AoSet, nullptr);
@@ -767,6 +775,7 @@ namespace Starfall {
 			sky.addBindingSet(m_GlobalSet);
 			sky.addBindingSet(m_SkySet);
 			commandList->setGraphicsState(sky);
+			SetSmallPush(commandList, nullptr);
 			commandList->draw(nvrhi::DrawArguments().setVertexCount(3));
 		}
 
@@ -783,7 +792,7 @@ namespace Starfall {
 		state.addBindingSet(m_TonemapSet);
 		commandList->setGraphicsState(state);
 		glm::vec4 push(static_cast<float>(mode), 0, 0, 0);
-		commandList->setPushConstants(&push, sizeof(push));
+		SetSmallPush(commandList, &push);
 		commandList->draw(nvrhi::DrawArguments().setVertexCount(3));
 	}
 
@@ -826,7 +835,7 @@ namespace Starfall {
 				composite.addBindingSet(m_OutlineSet);
 				commandList->setGraphicsState(composite);
 				glm::vec4 push(options.OutlineColor.r, options.OutlineColor.g, options.OutlineColor.b, 2.0f);
-				commandList->setPushConstants(&push, sizeof(push));
+				SetSmallPush(commandList, &push);
 				commandList->draw(nvrhi::DrawArguments().setVertexCount(3));
 			}
 		}
@@ -840,7 +849,7 @@ namespace Starfall {
 			commandList->setGraphicsState(state);
 			float extent = std::min(camera.Far, 400.0f);
 			glm::vec4 push(extent, std::round(camera.Position.x), std::round(camera.Position.z), 0);
-			commandList->setPushConstants(&push, sizeof(push));
+			SetSmallPush(commandList, &push);
 			commandList->draw(nvrhi::DrawArguments().setVertexCount(6));
 		}
 
@@ -875,6 +884,7 @@ namespace Starfall {
 				state.addBindingSet(m_GlobalSet);
 				state.addVertexBuffer(nvrhi::VertexBufferBinding().setBuffer(m_DebugVertexBuffer).setSlot(0));
 				commandList->setGraphicsState(state);
+				SetSmallPush(commandList, nullptr);
 				commandList->draw(nvrhi::DrawArguments().setVertexCount(static_cast<uint32_t>(count)).setStartVertexLocation(static_cast<uint32_t>(first)));
 			};
 			drawLines(m_Pipelines->LinesDepth, 0, depthLines.size());

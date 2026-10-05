@@ -2,7 +2,7 @@
 #extension GL_GOOGLE_include_directive : require
 
 #include "Frame.glsl"
-#define MATERIAL_SET 1
+#define MATERIAL_SET 2
 #include "Material.glsl"
 
 layout(location = 0) in vec3 vViewNormal;
